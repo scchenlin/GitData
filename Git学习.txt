@@ -46,6 +46,14 @@ git学习相关：
 6.远端代码到本地：
 	git pull
 
+注意：如果github创建了远程仓库，然后本地又创建了本地仓库，这个时候二者之间是没有任何关联的，
+网址：https://blog.csdn.net/u012145252/article/details/80628451
+拉取远程仓库到本地：	
+	git pull origin master --allow-unrelated-histories
+然后重新把本地仓库提交到远程github上：
+	git push origin master:master   git push <远程主机名> <本地分支名>:<远程分支名>
+
+
 
 远程仓库克隆版本：
 1：创建Git仓库
