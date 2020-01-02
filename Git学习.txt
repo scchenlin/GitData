@@ -1,0 +1,93 @@
+git学习相关：
+创建账号：
+	git config --global user.name "账号名称"
+	git config --global user.email "邮箱地址"
+把文件放入Git仓库：
+1.add命令，告诉Git，把文件提交到本地
+	git add 文件
+2.commit命令，告诉Git,把文件提交到仓库
+	git commit -m "说明内容"
+查看仓库状态：
+	git status
+查看修改内容：
+	git diff "modified的文件"
+查看版本提交历史：
+	git log
+版本切换：（在Git中，用 HEAD 标识当前版本 ，上一个版本就是HEAD^ HEAD^^ HEAD~100）
+	git reset --hard HEAD^(这个地方可以根据commit id指定版本)
+查看版本命令历史：(如果你版本进行了还原，也可以用这个命令找到之前的版本ID，从而恢复)
+	git reflog 
+撤销工作区更改:
+	(还原版本，当前修改还没有add到暂存区)
+	git checkout -- 文件名称
+	（还原版本，把已经add到暂存区的文件进行删除，然后执行checkout还原工作区）
+	git reset HEAD 文件名称 
+删除版本库的文件：(本地已经删除了，需要版本库进行删除)
+	git rm 文件名称
+	如果删错了的文件，可以直接撤销删除(checkout 因为不管是删除还是修改，只是更改了版本)
+
+
+关联远程仓库：
+1：创建SSH key:查看目录(一般是在C:\Users\Administrator)是否有.ssh文件夹(id_rsa/id_rsa.pub)文件，如果没有
+创建SSH key：
+	ssh-keygen -t rsa -C "邮箱地址"
+2：登录Github账号，添加SSH key，
+3.首先在GitHub创建一个Git仓库 GitOne
+4.Git与远程仓库(GitHub)关联：
+	git remote add origin https://github.com/scchenlin/GitOne.git
+如果报错：fatal:remote origin already exists.
+说明git本地已经关联了，先删除之前的
+	git remote rm origin
+查看git远程库连接状态：
+	git remote -v    如果没有任何显示代表没有连接成功
+5.把本地仓库的内容提交到远程GitHub上：
+	git push -u origin master  (-u参数：由于远程库是空的，我们第一次推送master分支时，加上了-u参数，
+	Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令。)
+6.远端代码到本地：
+	git pull
+
+
+远程仓库克隆版本：
+1：创建Git仓库
+2：克隆到本地仓库（直接选中目录，克隆后会直接生成远端的目录）
+	git clone https://github.com/scchenlin/GitOne.git
+	git clone git@github.com:用户名/.git
+Git支持多种协议，包括https，但通过ssh支持的原生git协议速度最快。
+
+
+创建合并分支：
+1:创建分支
+	git branch 分支名称
+2:切换分支
+	git switch 分支名称/ git checkout 分支名称 (checkout由于跟之前撤销版本命令类似，尽量不用)
+3：删除分支
+	git branch -d 分支名称
+4：查看分支：
+	git branch
+5:合并某分支到当前分支 （此种合并为快速合并）
+	git merge 分支名称
+6：创建加切换快捷：
+	git switch -c 分支名称/git checkout -b 分支名称
+	
+
+解决合并冲突：
+如果在合并分支的时候，出现错误，必须手动修改文件，然后重新提交
+	git log --graph 查看分支合并图
+
+
+分支管理策略：
+	合并时添加 --no-ff参数,用普通模式合并，合并后的历史有分支，能看出来曾经做过合并，而fast forward合并就看不出来曾经做过合并
+	git merge --no-ff -m "合并信息" 分支名称
+	
+	
+
+
+
+
+
+
+	
+
+
+
+
